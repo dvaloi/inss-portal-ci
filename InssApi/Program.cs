@@ -19,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<IContribuinteRepository, ContribuinteRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
@@ -28,7 +28,7 @@ builder.Services.AddScoped<IPedidoService, PedidoService>();
 
 // M13 — CORS (igual à manhã)
 builder.Services.AddCors(o => o.AddPolicy("portal", p =>
-    p.WithOrigins("http://localhost:5173")
+    p.WithOrigins("*")
      .AllowAnyHeader()
      .AllowAnyMethod()));
 
